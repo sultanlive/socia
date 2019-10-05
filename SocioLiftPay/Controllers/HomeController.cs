@@ -22,12 +22,11 @@ namespace SocioLiftPay.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Pay(string first, string last, string iin, float sum,
-            string fio, string school, string backUrl = "http://sociolift.kz", string requestUrl = "http://sociolift.kz")
+        public async Task<IActionResult> Pay(string desc, float sum, string backUrl = "http://sociolift.kz", string requestUrl = "http://sociolift.kz")
         {
             try
             {
-                var operationUrl = await _pay.Pay(first, last, iin, sum, fio, school, backUrl, requestUrl);
+                var operationUrl = await _pay.Pay(desc, sum, backUrl, requestUrl);
                 return Json(operationUrl);
             }
             catch(System.Exception exp)
@@ -36,12 +35,11 @@ namespace SocioLiftPay.Controllers
             }
         }
 
-        public async Task<IActionResult> PayTest(string first, string last, string iin, float sum,
-            string fio, string school, string backUrl = "http://sociolift.kz", string requestUrl = "http://sociolift.kz")
+        public async Task<IActionResult> PayTest(string desc, float sum, string backUrl = "http://sociolift.kz", string requestUrl = "http://sociolift.kz")
         {
             try
             {
-                var operationUrl = await _payTest.Pay(first, last, iin, sum, fio, school, backUrl, requestUrl);
+                var operationUrl = await _payTest.Pay(desc, sum, backUrl, requestUrl);
                 return Json(operationUrl);
             }
             catch(System.Exception exp)

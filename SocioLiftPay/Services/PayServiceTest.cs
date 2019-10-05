@@ -16,7 +16,7 @@ namespace SocioLiftPay.Services
             _configuration = configuration;
         }
 
-        public async Task<string> Pay(string first, string last, string iin, float sum, string fio, string school, string backUrl, string requestUrl)
+        public async Task<string> Pay(string desc, float sum, string backUrl, string requestUrl)
         {
             string username = _configuration["WooppayTest:Username"];
             string password = _configuration["WooppayTest:Password"];
@@ -26,7 +26,7 @@ namespace SocioLiftPay.Services
                 throw new ArgumentException("Нет данных о платеже.");
             }
 
-            if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(last) || string.IsNullOrEmpty(iin))
+            if (string.IsNullOrEmpty(desc))
             {
                 throw new ArgumentException("Нет данных о пользователе.");
             }
@@ -36,7 +36,7 @@ namespace SocioLiftPay.Services
                 throw new ArgumentException("Сумма оплаты должна быть больше нуля.");
             }
 
-            var description = $"Имя: {first}. Фамилия: {last}. ИИН: {iin}. ФИО Ученика: {fio}. Школа: {school}";
+            var description = desc;
             var creditination = await Login(username, password);
 
             var result = await _client.cash_createInvoiceAsync(new CashCreateInvoiceRequest()

@@ -4,6 +4,6 @@ namespace SocioLiftPay.Services
 {
     public interface IPayService
     {
-        Task<string> Pay(string first, string last, string iin, float sum, string fio, string school, string backUrl, string requestUrl);
+        Task<string> Pay(string desc, float sum, string backUrl, string requestUrl);
     }
 }
