@@ -28,7 +28,7 @@ namespace SocioLiftPay
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IPayService, PayServiceTest>();
             services.AddTransient<PayService>();
@@ -55,6 +55,7 @@ namespace SocioLiftPay
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseMvc(routes =>
             {
